@@ -7,7 +7,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { toast } from 'sonner';
 
-const BASE_URL = 'https://addressweb.app';
+const BASE_URL = 'https://addressweb.brumerie.com';
 
 const ENDPOINTS = [
   {
@@ -49,7 +49,7 @@ const ENDPOINTS = [
   }'`,
     response: `{
   "addressCode": "AW-ABJ-84321",
-  "shareLink": "https://addressweb.app/AW-ABJ-84321",
+  "shareLink": "https://addressweb.brumerie.com/AW-ABJ-84321",
   "latitude": 5.360012,
   "longitude": -4.008456
 }`,
@@ -249,7 +249,7 @@ export function ApiDocsPage() {
             <Link to="/auth">
               <Button variant="secondary" size="lg">Créer un compte gratuit</Button>
             </Link>
-            <a href="mailto:contact@addressweb.app">
+            <a href="mailto:contact@addressweb.brumerie.com">
               <Button variant="outline" size="lg" className="border-indigo-300 text-white hover:bg-indigo-700">
                 Contacter l'équipe
               </Button>

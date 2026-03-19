@@ -127,7 +127,7 @@ export function HomePage() {
           {/* Demo link */}
           <div className="mt-8 inline-flex items-center gap-2 bg-white rounded-xl px-5 py-3 shadow-sm border border-indigo-100">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-gray-400 font-mono text-sm">addressweb.app/</span>
+            <span className="text-gray-400 font-mono text-sm">addressweb.brumerie.com/</span>
             <span className="text-indigo-600 font-mono font-bold text-sm">AW-ABJ-84321</span>
           </div>
         </div>

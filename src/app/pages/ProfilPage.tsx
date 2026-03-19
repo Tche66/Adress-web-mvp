@@ -650,7 +650,7 @@ export function ProfilPage() {
             <Card className="p-5 bg-gray-50">
               <h3 className="font-semibold text-gray-900 mb-3">Utilisation rapide</h3>
               <pre className="bg-gray-900 text-green-400 text-xs p-4 rounded-lg overflow-x-auto">
-{`curl https://addressweb.app/api/v1/addresses/AW-ABJ-84321 \
+{`curl https://addressweb.brumerie.com/api/v1/addresses/AW-ABJ-84321 \
   -H "Authorization: Bearer VOTRE_CLE_API"`}
               </pre>
               <Link to="/api" className="inline-block mt-3 text-sm text-indigo-600 hover:underline">

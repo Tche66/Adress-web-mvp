@@ -107,7 +107,7 @@ export function PolitiqueConfidentialitePage() {
               <li><strong>Droit d'opposition</strong> — s'opposer à certains traitements.</li>
             </ul>
             <p className="text-gray-600 leading-relaxed mt-3">
-              Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@addressweb.app" className="text-indigo-600 hover:underline">contact@addressweb.app</a>
+              Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@addressweb.brumerie.com" className="text-indigo-600 hover:underline">contact@addressweb.brumerie.com</a>
             </p>
           </section>
 
@@ -121,7 +121,7 @@ export function PolitiqueConfidentialitePage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">10. Contact</h2>
             <p className="text-gray-600 leading-relaxed">
-              Pour toute question relative à la protection de vos données : <a href="mailto:contact@addressweb.app" className="text-indigo-600 hover:underline">contact@addressweb.app</a>
+              Pour toute question relative à la protection de vos données : <a href="mailto:contact@addressweb.brumerie.com" className="text-indigo-600 hover:underline">contact@addressweb.brumerie.com</a>
             </p>
           </section>
         </div>

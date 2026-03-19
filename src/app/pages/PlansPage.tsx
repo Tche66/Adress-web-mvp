@@ -86,7 +86,7 @@ const PLANS = [
       'Intégration GPS / ERP personnalisée',
     ],
     cta: 'Contacter l\'équipe',
-    ctaLink: 'mailto:api@addressweb.app',
+    ctaLink: 'mailto:api@addressweb.brumerie.com',
   },
 ];
 

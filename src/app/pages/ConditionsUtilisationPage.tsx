@@ -82,7 +82,7 @@ export function ConditionsUtilisationPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Suspension et suppression</h2>
             <p className="text-gray-600 leading-relaxed">
-              Address-Web se réserve le droit de supprimer toute adresse ou de suspendre tout compte qui violerait les présentes conditions d'utilisation, sans préavis ni justification. Les utilisateurs peuvent demander la suppression de leurs données à tout moment en contactant l'équipe via <a href="mailto:contact@addressweb.app" className="text-indigo-600 hover:underline">contact@addressweb.app</a>.
+              Address-Web se réserve le droit de supprimer toute adresse ou de suspendre tout compte qui violerait les présentes conditions d'utilisation, sans préavis ni justification. Les utilisateurs peuvent demander la suppression de leurs données à tout moment en contactant l'équipe via <a href="mailto:contact@addressweb.brumerie.com" className="text-indigo-600 hover:underline">contact@addressweb.brumerie.com</a>.
             </p>
           </section>
 
@@ -103,7 +103,7 @@ export function ConditionsUtilisationPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">10. Contact</h2>
             <p className="text-gray-600 leading-relaxed">
-              Pour toute question : <a href="mailto:contact@addressweb.app" className="text-indigo-600 hover:underline">contact@addressweb.app</a>
+              Pour toute question : <a href="mailto:contact@addressweb.brumerie.com" className="text-indigo-600 hover:underline">contact@addressweb.brumerie.com</a>
             </p>
           </section>
         </div>

@@ -29,8 +29,8 @@ const PAGE_SIZE = 25;
 const DEFAULT_PLANS = [
   { id: 'premium_annual',   name: 'Premium Annuel',  price: '10', link: '/paiement?plan=premium_annual' },
   { id: 'premium_lifetime', name: 'Premium Lifetime', price: '25', link: '/paiement?plan=premium_lifetime' },
-  { id: 'enterprise',       name: 'API Entreprise',   price: '50', link: 'mailto:api@addressweb.app' },
-  { id: 'qr_code',          name: 'QR Code physique', price: '2.5', link: 'mailto:qr@addressweb.app' },
+  { id: 'enterprise',       name: 'API Entreprise',   price: '50', link: 'mailto:api@addressweb.brumerie.com' },
+  { id: 'qr_code',          name: 'QR Code physique', price: '2.5', link: 'mailto:qr@addressweb.brumerie.com' },
 ];
 
 export function AdminPage() {

@@ -297,6 +297,20 @@ export async function signOut() {
   await supabase.auth.signOut();
 }
 
+export async function signInWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/profil`,
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent',
+      },
+    },
+  });
+  if (error) throw new Error(error.message);
+}
+
 export async function getCurrentUser() {
   const { data: { user } } = await supabase.auth.getUser();
   return user;
