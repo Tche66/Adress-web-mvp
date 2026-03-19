@@ -1,0 +1,74 @@
+{
+  "name": "Address-Web \u2014 Adressage num\u00e9rique Afrique",
+  "short_name": "Address-Web",
+  "description": "Donnez une adresse num\u00e9rique pr\u00e9cise \u00e0 chaque lieu en Afrique",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1B4F8A",
+  "orientation": "portrait-primary",
+  "lang": "fr",
+  "categories": [
+    "navigation",
+    "utilities",
+    "maps"
+  ],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cr\u00e9er une adresse",
+      "short_name": "Cr\u00e9er",
+      "url": "/create",
+      "icons": [
+        {
+          "src": "/icons/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Explorer la carte",
+      "short_name": "Explorer",
+      "url": "/explorer",
+      "icons": [
+        {
+          "src": "/icons/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
