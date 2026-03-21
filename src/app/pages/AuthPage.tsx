@@ -258,17 +258,21 @@ export function AuthPage() {
 
                 {/* Bouton soumettre */}
                 <Button onClick={handleSubmit} disabled={loading || googleLoading}
-                  className="w-full mt-2" size="lg">
+                  className="w-full mt-2 bg-indigo-600 hover:bg-indigo-700 text-white" size="lg">
                   {loading
                     ? <><Loader2 className="w-4 h-4 animate-spin mr-2" />Chargement...</>
                     : mode === 'login' ? 'Se connecter' : 'Créer mon compte'}
                 </Button>
 
                 {/* Switcher login ↔ register */}
-                <div className="text-center">
+                <div className="text-center pt-1">
                   <button type="button"
                     onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
-                    className="text-sm text-indigo-600 hover:underline">
+                    className={`w-full py-2.5 rounded-lg text-sm font-medium border-2 transition-colors ${
+                      mode === 'login'
+                        ? 'border-indigo-600 text-indigo-600 hover:bg-indigo-50'
+                        : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                    }`}>
                     {mode === 'login' ? "Pas encore de compte ? S'inscrire" : 'Déjà un compte ? Se connecter'}
                   </button>
                 </div>

@@ -20,6 +20,7 @@ import { PolitiqueConfidentialitePage } from "./pages/PolitiqueConfidentialitePa
 import { ConditionsUtilisationPage } from "./pages/ConditionsUtilisationPage";
 import { SystemStatus } from "./pages/SystemStatus";
 import { NotFound } from "./pages/NotFound";
+import { BrumerieAuthPage } from "./pages/BrumerieAuthPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
       { path: "/",                          Component: HomePage },
       { path: "/auth",                      Component: AuthPage },
       { path: "/reinitialiser-mot-de-passe",Component: ResetPasswordPage },
+      { path: "/auth/brumerie",              Component: BrumerieAuthPage },
       { path: "/explorer",                  Component: ExplorePage },
       { path: "/api",                       Component: ApiDocsPage },
       { path: "/plans",                     Component: PlansPage },

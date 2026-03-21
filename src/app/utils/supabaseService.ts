@@ -110,11 +110,6 @@ export async function saveAddress(data: {
 
   if (error) throw new Error(`Erreur sauvegarde: ${error.message}`);
 
-  // Incrémenter le compteur d'adresses du profil
-  try {
-    await supabase.rpc('increment_adresses_count', { user_id_param: user.id });
-  } catch (_) {}
-
   return dbToAddress(row);
 }
 
