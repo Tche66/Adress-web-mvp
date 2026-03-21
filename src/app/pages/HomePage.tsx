@@ -241,7 +241,7 @@ export function HomePage() {
       <section className="bg-indigo-700 py-12 px-4 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Globe className="w-8 h-8 text-indigo-300" />
+            <img src="/logo-brumerie.png" alt="Brumerie" style={{width:40,height:40,objectFit:"contain"}} />
             <span className="text-indigo-300 font-semibold text-lg">Une initiative Brumerie</span>
           </div>
           <h2 className="text-2xl font-bold mb-4">

@@ -261,7 +261,7 @@ export function AuthPage() {
                     <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
                     <img
-                      src="https://addressweb.brumerie.com/logo.png"
+                      src="/logo-brumerie.png"
                       alt="Brumerie"
                       className="w-5 h-5 object-contain"
                     />
