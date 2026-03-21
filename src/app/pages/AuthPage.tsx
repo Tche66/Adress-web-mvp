@@ -24,6 +24,7 @@ export function AuthPage() {
   const [mode, setMode]         = useState<Mode>('login');
   const [loading, setLoading]   = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [brumerieLoading, setBrumerieLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const [resetSent, setResetSent] = useState(false);
   const [form, setForm] = useState({ email: '', password: '', nom: '', profession: 'particulier' });
@@ -39,6 +40,67 @@ export function AuthPage() {
     } catch (err: any) {
       toast.error(err.message || 'Erreur connexion Google');
       setGoogleLoading(false);
+    }
+  };
+
+  // ── Connexion via Brumerie ─────────────────────────────────────
+  const handleBrumerie = async () => {
+    setBrumerieLoading(true);
+    try {
+      // Ouvrir le flow OAuth de Brumerie dans une popup
+      // Brumerie redirige vers notre bridge /api/aw-auth après connexion Firebase
+      const popup = window.open(
+        'https://brumerie.com/auth?redirect_to=addressweb',
+        'brumerie_auth',
+        'width=500,height=600,left=200,top=100'
+      );
+
+      // Écouter le message de la popup Brumerie quand la connexion est faite
+      const handleMessage = async (event: MessageEvent) => {
+        if (event.origin !== 'https://brumerie.com') return;
+        if (event.data?.type !== 'BRUMERIE_AUTH_SUCCESS') return;
+
+        window.removeEventListener('message', handleMessage);
+        popup?.close();
+
+        const { uid, email, name } = event.data;
+        if (!uid || !email) {
+          toast.error('Données Brumerie manquantes');
+          setBrumerieLoading(false);
+          return;
+        }
+
+        // Appeler le bridge pour obtenir le magic link Supabase
+        const res = await fetch('/api/aw-auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ uid, email, name }),
+        });
+        const data = await res.json();
+
+        if (data.magicLink) {
+          // Suivre le magic link — Supabase connecte l'utilisateur
+          window.location.href = data.magicLink;
+        } else {
+          toast.error('Erreur de connexion Brumerie');
+          setBrumerieLoading(false);
+        }
+      };
+
+      window.addEventListener('message', handleMessage);
+
+      // Timeout si la popup est fermée sans se connecter
+      const checkClosed = setInterval(() => {
+        if (popup?.closed) {
+          clearInterval(checkClosed);
+          window.removeEventListener('message', handleMessage);
+          setBrumerieLoading(false);
+        }
+      }, 1000);
+
+    } catch (err: any) {
+      toast.error(err.message || 'Erreur connexion Brumerie');
+      setBrumerieLoading(false);
     }
   };
 
@@ -184,6 +246,27 @@ export function AuthPage() {
                     </svg>
                   )}
                   {mode === 'login' ? 'Continuer avec Google' : "S'inscrire avec Google"}
+                </Button>
+
+                {/* ════ BOUTON BRUMERIE ════ */}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="w-full flex items-center justify-center gap-3 border-[#1B4F8A] text-[#1B4F8A] hover:bg-blue-50 font-medium"
+                  onClick={handleBrumerie}
+                  disabled={brumerieLoading || googleLoading || loading}
+                >
+                  {brumerieLoading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <img
+                      src="https://addressweb.brumerie.com/logo.png"
+                      alt="Brumerie"
+                      className="w-5 h-5 object-contain"
+                    />
+                  )}
+                  {mode === 'login' ? 'Continuer avec Brumerie' : "S'inscrire avec Brumerie"}
                 </Button>
 
                 {/* Séparateur */}
