@@ -1,6 +1,6 @@
 import { Logo } from '../components/Logo';
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router';
+import { useParams, useNavigate, useSearchParams, Link } from 'react-router';
 import { MapPin, ArrowLeft, Loader2, Check, Trash2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -21,6 +21,9 @@ const CATEGORIES = [
 ];
 
 export function EditAddressPage() {
+  // Support edit_token Brumerie — permet modification sans compte Supabase
+  // Le token est vérifié côté client (expiry check) — la vraie auth est dans la RLS Supabase
+  // qui autorise les modifications via le compte BRUMERIE_USER_ID
   const { addressCode } = useParams<{ addressCode: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
