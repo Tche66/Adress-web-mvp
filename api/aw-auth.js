@@ -1,6 +1,6 @@
 // api/aw-auth.js — Bridge SSO Brumerie → Address-Web
-// Crée/retrouve le compte Supabase de l'utilisateur Brumerie
-// et génère un magic link pour connexion automatique
+// Utilise la table brumerie_users pour retrouver/créer les comptes
+// sans lister tous les users Supabase (évite l'erreur 500)
 
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
 const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
@@ -11,6 +11,13 @@ const ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://localhost:5173',
 ];
+
+const headers = (key) => ({
+  'apikey':        key,
+  'Authorization': `Bearer ${key}`,
+  'Content-Type':  'application/json',
+  'Prefer':        'return=representation',
+});
 
 export default async function handler(req, res) {
   const origin = req.headers.origin;
@@ -29,71 +36,104 @@ export default async function handler(req, res) {
   const { uid, email, name } = req.body || {};
   if (!uid || !email) return res.status(400).json({ error: 'uid et email requis' });
 
-  const headers = {
-    'apikey': SERVICE_KEY,
-    'Authorization': `Bearer ${SERVICE_KEY}`,
-    'Content-Type': 'application/json',
-  };
+  const h = headers(SERVICE_KEY);
 
   try {
-    // 1. Chercher si le compte Supabase existe déjà
-    const searchRes = await fetch(
-      `${SUPABASE_URL}/auth/v1/admin/users?email=${encodeURIComponent(email)}`,
-      { headers }
+    // ── ÉTAPE 1 : Chercher dans brumerie_users par Firebase UID ──
+    const lookupRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/brumerie_users?brumerie_uid=eq.${encodeURIComponent(uid)}&select=supabase_id`,
+      { headers: h }
     );
-    const searchData = await searchRes.json();
+    const existing = await lookupRes.json();
 
     let supabaseUserId;
     let isNewUser = false;
 
-    if (searchData.users && searchData.users.length > 0) {
-      supabaseUserId = searchData.users[0].id;
+    if (existing && existing.length > 0) {
+      // ✅ Utilisateur connu — récupérer son Supabase ID directement
+      supabaseUserId = existing[0].supabase_id;
+
     } else {
-      // Créer le compte avec l'email Brumerie
-      const createRes = await fetch(`${SUPABASE_URL}/auth/v1/admin/users`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          email,
-          email_confirm: true,
-          user_metadata: {
-            brumerie_uid: uid,
-            full_name: name || email.split('@')[0],
-            source: 'brumerie_sso',
-          },
-        }),
-      });
+      // 🆕 Nouvel utilisateur — créer le compte Supabase
+      const createRes = await fetch(
+        `${SUPABASE_URL}/auth/v1/admin/users`,
+        {
+          method: 'POST',
+          headers: h,
+          body: JSON.stringify({
+            email,
+            email_confirm: true,
+            user_metadata: {
+              brumerie_uid: uid,
+              full_name: name || email.split('@')[0],
+              source: 'brumerie_sso',
+            },
+          }),
+        }
+      );
       const created = await createRes.json();
-      if (!created.id) return res.status(500).json({ error: 'Erreur création compte', detail: created });
-      supabaseUserId = created.id;
-      isNewUser = true;
+
+      // Gérer le cas où le compte email existe déjà dans Supabase
+      // mais pas encore dans brumerie_users (migration)
+      if (!created.id && created.msg?.includes('already been registered')) {
+        // Chercher par email via l'endpoint individuel
+        const byEmailRes = await fetch(
+          `${SUPABASE_URL}/auth/v1/admin/users?email=${encodeURIComponent(email)}&page=1&per_page=1`,
+          { headers: h }
+        );
+        const byEmail = await byEmailRes.json();
+        if (byEmail.users && byEmail.users.length > 0) {
+          supabaseUserId = byEmail.users[0].id;
+        } else {
+          return res.status(500).json({ error: 'Compte existant introuvable', detail: created });
+        }
+      } else if (!created.id) {
+        return res.status(500).json({ error: 'Erreur création compte', detail: created });
+      } else {
+        supabaseUserId = created.id;
+        isNewUser = true;
+      }
+
+      // Enregistrer le lien Firebase UID ↔ Supabase UUID dans brumerie_users
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/brumerie_users`,
+        {
+          method: 'POST',
+          headers: h,
+          body: JSON.stringify({
+            brumerie_uid: uid,
+            supabase_id:  supabaseUserId,
+            email,
+          }),
+        }
+      );
     }
 
-    // 2. Générer le magic link — redirige vers /auth/brumerie
+    // ── ÉTAPE 2 : Générer le magic link ──────────────────────────
     const otpRes = await fetch(
       `${SUPABASE_URL}/auth/v1/admin/users/${supabaseUserId}/magiclink`,
       {
         method: 'POST',
-        headers,
+        headers: h,
         body: JSON.stringify({
           redirect_to: 'https://addressweb.brumerie.com/auth/brumerie',
         }),
       }
     );
     const otpData = await otpRes.json();
+
     if (!otpData.action_link) {
       return res.status(500).json({ error: 'Erreur magic link', detail: otpData });
     }
 
-    // Retourner le supabaseUserId — Brumerie doit le stocker
-    // pour l'utiliser comme user_id lors de la création d'adresses
     return res.status(200).json({
       magicLink:      otpData.action_link,
-      supabaseUserId, // ← stocker côté Brumerie pour créer les adresses
+      supabaseUserId, // stocker côté Brumerie pour les créations d'adresses
       isNewUser,
     });
 
   } catch (err) {
+    console.error('SSO Error:', err);
     return res.status(500).json({ error: err.message });
   }
 }
