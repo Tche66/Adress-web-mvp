@@ -21,17 +21,22 @@ const CATEGORIES = [
 ];
 
 export function EditAddressPage() {
-  // Support edit_token Brumerie — permet modification sans compte Supabase
-  // Le token est vérifié côté client (expiry check) — la vraie auth est dans la RLS Supabase
-  // qui autorise les modifications via le compte BRUMERIE_USER_ID
   const { addressCode } = useParams<{ addressCode: string }>();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  // Mode Brumerie : edit_token + uid dans l'URL → pas besoin de compte Supabase
+  const editToken   = searchParams.get('edit_token');
+  const brumerieUid = searchParams.get('uid');
+  const isBrumerieMode = !!editToken && !!brumerieUid;
+
   const [address, setAddress] = useState<Address | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [tokenValid, setTokenValid] = useState(false);
 
   const [form, setForm] = useState({
     repere: '',
@@ -44,15 +49,35 @@ export function EditAddressPage() {
   useEffect(() => {
     if (!addressCode) return;
     getAddressByCode(addressCode).then(addr => {
-      if (!addr) { toast.error('Adresse introuvable'); navigate('/profil'); return; }
-      if (addr.userId !== user?.id) { toast.error('Vous ne pouvez pas modifier cette adresse'); navigate(`/${addressCode}`); return; }
+      if (!addr) { toast.error('Adresse introuvable'); navigate('/'); return; }
+
+      // Mode Brumerie — vérifier le token et l'uid
+      if (isBrumerieMode) {
+        // Vérifier l'expiry du token (format: expiry.signature)
+        const expiry = parseInt(editToken!.split('.')[0]);
+        if (Date.now() > expiry) {
+          toast.error('Lien de modification expiré. Demandez un nouveau lien depuis Brumerie.');
+          navigate(`/${addressCode}`);
+          return;
+        }
+        setTokenValid(true);
+      } else {
+        // Mode normal — vérifier que l'utilisateur est propriétaire
+        if (!user) { navigate('/auth'); return; }
+        if (addr.userId !== user.id) {
+          toast.error('Vous ne pouvez pas modifier cette adresse');
+          navigate(`/${addressCode}`);
+          return;
+        }
+      }
+
       setAddress(addr);
       setForm({
-        repere: addr.repere || '',
-        ville: addr.ville || '',
-        quartier: addr.quartier || '',
+        repere:    addr.repere    || '',
+        ville:     addr.ville     || '',
+        quartier:  addr.quartier  || '',
         categorie: addr.categorie || 'autre',
-        isPublic: addr.isPublic !== false,
+        isPublic:  addr.isPublic  !== false,
       });
       setLoading(false);
     });
