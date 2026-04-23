@@ -136,7 +136,7 @@ export function AddressDetailsPage() {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               
-              <h1 className="text-xl font-bold text-gray-900">Address-Web</h1>
+              <h1 className="text-xl font-bold text-gray-900">Adresse Postale Web</h1>
             </Link>
             <div className="flex items-center gap-2">
               {isOwner && (
@@ -403,7 +403,7 @@ export function AddressDetailsPage() {
       <footer className="bg-white border-t py-6 mt-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900">
-            <Logo size={28} /><span className="font-semibold">Address-Web</span>
+            <Logo size={28} /><span className="font-semibold">Adresse Postale Web</span>
           </Link>
           <p className="text-sm text-gray-500 mt-2">Solution d'adressage numérique pour l'Afrique</p>
         </div>

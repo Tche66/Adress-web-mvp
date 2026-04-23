@@ -8,7 +8,7 @@ export interface Address {
   createdAt: string;
 }
 
-const STORAGE_KEY = 'addressweb_addresses';
+const STORAGE_KEY = 'adressepostalweb_addresses';
 
 // Générer un code d'adresse unique
 export function generateAddressCode(ville: string): string {
@@ -87,7 +87,7 @@ export function getGoogleMapsLink(lat: number, lng: number): string {
 // Partager via WhatsApp
 export function shareViaWhatsApp(addressCode: string, repere: string): void {
   const link = getShareLink(addressCode);
-  const message = `Voici mon adresse Address-Web: ${addressCode}\n${repere}\n${link}`;
+  const message = `Voici mon adresse Adresse Postale Web: ${addressCode}\n${repere}\n${link}`;
   window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
 }
 

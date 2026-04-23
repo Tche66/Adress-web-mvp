@@ -49,7 +49,7 @@ export async function getCityFromCoordinates(lat: number, lng: number): Promise<
       `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=fr`,
       {
         headers: {
-          'User-Agent': 'AddressWeb/1.0 (adressage numerique Afrique)',
+          'User-Agent': 'AdressePostaleWeb/1.0 (adressage numerique Afrique)',
         },
       }
     );

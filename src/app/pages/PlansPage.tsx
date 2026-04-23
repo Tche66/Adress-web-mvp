@@ -119,7 +119,7 @@ export function PlansPage() {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               
-              <Logo size={32} /><span className="text-xl font-bold text-gray-900">Address-Web</span>
+              <Logo size={32} /><span className="text-xl font-bold text-gray-900">Adresse Postale Web</span>
             </Link>
             {!user && <Link to="/auth"><Button size="sm">Se connecter</Button></Link>}
           </div>

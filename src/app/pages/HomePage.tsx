@@ -30,7 +30,7 @@ export function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Logo size={36} />
-              <h1 className="text-2xl font-bold text-gray-900">Address-Web</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Adresse Postale Web</h1>
             </div>
             <div className="flex items-center gap-3">
               <Link to="/explorer">
@@ -82,7 +82,7 @@ export function HomePage() {
           Une solution simple pour les zones sans adresse postale.
         </p>
         <p className="text-sm text-gray-500 mb-8 max-w-xl mx-auto">
-          En Afrique, plus de 60% des lieux n'ont pas d'adresse officielle. Address-Web résout ce problème en donnant à chaque maison, commerce et bureau un code unique permanent.
+          En Afrique, plus de 60% des lieux n'ont pas d'adresse officielle. Adresse Postale Web résout ce problème en donnant à chaque maison, commerce et bureau un code unique permanent.
         </p>
 
         {/* Barre de recherche */}
@@ -126,7 +126,7 @@ export function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-3">Pourquoi pas juste Google Maps ?</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Google Maps montre où vous êtes. Address-Web vous donne une adresse permanente, partageable et mémorisable — même sans internet.</p>
+            <p className="text-gray-500 max-w-2xl mx-auto">Google Maps montre où vous êtes. Adresse Postale Web vous donne une adresse permanente, partageable et mémorisable — même sans internet.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {[
@@ -216,7 +216,7 @@ export function HomePage() {
       {/* ── CAS D'USAGE CONCRETS ── */}
       <section className="bg-white py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">Ils utilisent Address-Web</h2>
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">Ils utilisent Adresse Postale Web</h2>
           <p className="text-gray-500 text-center mb-10">Des exemples concrets du quotidien en Afrique</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -248,7 +248,7 @@ export function HomePage() {
             Connecté à l'écosystème Brumerie
           </h2>
           <p className="text-indigo-200 max-w-2xl mx-auto mb-6">
-            Address-Web est développé par <strong className="text-white">Brumerie</strong>, la marketplace locale qui connecte acheteurs et vendeurs en Afrique. Si vous êtes déjà client Brumerie, connectez-vous en un clic avec votre compte existant.
+            Adresse Postale Web est développé par <strong className="text-white">Brumerie</strong>, la marketplace locale qui connecte acheteurs et vendeurs en Afrique. Si vous êtes déjà client Brumerie, connectez-vous en un clic avec votre compte existant.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="https://brumerie.com" target="_blank" rel="noopener noreferrer">
@@ -258,7 +258,7 @@ export function HomePage() {
             </a>
             <Link to="/auth">
               <Button size="lg" className="bg-white text-indigo-700 hover:bg-indigo-50 px-8 font-bold">
-                Créer mon adresse Address-Web
+                Créer mon adresse Adresse Postale Web
               </Button>
             </Link>
           </div>
@@ -276,7 +276,7 @@ export function HomePage() {
               { icon: <Navigation className="w-6 h-6 text-orange-600" />, bg: 'bg-orange-100', t: 'Navigation GPS', d: 'Naviguez directement vers n\'importe quelle adresse via Google Maps ou Waze.' },
               { icon: <QrCode className="w-6 h-6 text-purple-600" />, bg: 'bg-purple-100', t: 'QR Code inclus', d: 'Chaque adresse génère un QR code imprimable pour votre vitrine ou porte.' },
               { icon: <ShieldCheck className="w-6 h-6 text-blue-600" />, bg: 'bg-blue-100', t: 'Adresse certifiée', d: '3 confirmations de la communauté = badge Certifié ✓. Signal de confiance.' },
-              { icon: <Smartphone className="w-6 h-6 text-pink-600" />, bg: 'bg-pink-100', t: 'App installable', d: 'Installez Address-Web sur votre téléphone comme une app, fonctionne hors ligne.' },
+              { icon: <Smartphone className="w-6 h-6 text-pink-600" />, bg: 'bg-pink-100', t: 'App installable', d: 'Installez Adresse Postale Web sur votre téléphone comme une app, fonctionne hors ligne.' },
             ].map(f => (
               <Card key={f.t} className="p-6">
                 <div className={`w-12 h-12 ${f.bg} rounded-lg flex items-center justify-center mb-4`}>{f.icon}</div>
@@ -308,7 +308,7 @@ export function HomePage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
             <div className="flex items-center gap-2">
               <Logo size={28} />
-              <span className="font-semibold text-lg">Address-Web</span>
+              <span className="font-semibold text-lg">Adresse Postale Web</span>
               <span className="text-gray-500 text-sm ml-2">par Brumerie</span>
             </div>
             <div className="flex gap-6 text-sm text-gray-400 flex-wrap justify-center">
@@ -322,7 +322,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-6 text-center">
-            <p className="text-gray-500 text-xs">© 2026 Address-Web — Une solution d'adressage numérique pour l'Afrique</p>
+            <p className="text-gray-500 text-xs">© 2026 Adresse Postale Web — Une solution d'adressage numérique pour l'Afrique</p>
             <p className="text-gray-600 text-xs mt-1">Développé par <a href="https://brumerie.com" className="text-gray-400 hover:text-white">Brumerie</a> — addressweb.brumerie.com</p>
           </div>
         </div>

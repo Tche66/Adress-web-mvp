@@ -66,7 +66,7 @@ export function LivreurDashboardPage() {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               
-              <h1 className="text-xl font-bold text-gray-900">Address-Web</h1>
+              <h1 className="text-xl font-bold text-gray-900">Adresse Postale Web</h1>
               <span className="text-gray-400">›</span>
               <span className="text-gray-600 font-medium">Tableau de bord livreur</span>
             </Link>

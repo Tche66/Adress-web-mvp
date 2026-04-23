@@ -53,7 +53,7 @@ export function ResetPasswordPage() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center gap-2">
             
-              <Logo size={32} /><span className="text-xl font-bold text-gray-900">Address-Web</span>
+              <Logo size={32} /><span className="text-xl font-bold text-gray-900">Adresse Postale Web</span>
           </div>
         </div>
       </header>
@@ -65,7 +65,7 @@ export function ResetPasswordPage() {
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 {done
                   ? <CheckCircle className="w-8 h-8 text-green-600" />
-                  : <img src="/logo.png" alt="Address-Web" style={{width:32,height:32,objectFit:"contain"}} />
+                  : <img src="/logo.png" alt="Adresse Postale Web" style={{width:32,height:32,objectFit:"contain"}} />
                 }
               </div>
               <h1 className="text-2xl font-bold text-gray-900">

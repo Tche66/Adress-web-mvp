@@ -4,7 +4,7 @@
 
 export const APP_CONFIG = {
   // Application info
-  name: 'Address-Web',
+  name: 'Adresse Postale Web',
   version: '1.0.0',
   description: 'Solution d\'adressage numérique pour l\'Afrique',
   
@@ -31,7 +31,7 @@ export const APP_CONFIG = {
   
   // Storage
   storage: {
-    key: 'addressweb_addresses',
+    key: 'adressepostalweb_addresses',
     seedOnFirstLoad: true,
   },
   

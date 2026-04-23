@@ -68,7 +68,7 @@ export function MyPlacesPage() {
           <div style={s.empty}>
             <div style={s.emptyIcon}>🗺️</div>
             <p style={s.emptyTitle}>Aucun lieu sauvegardé</p>
-            <p style={s.emptySub}>Ouvrez un lien Address-Web et appuyez sur "Sauvegarder" pour l'ajouter ici.</p>
+            <p style={s.emptySub}>Ouvrez un lien Adresse Postale Web et appuyez sur "Sauvegarder" pour l'ajouter ici.</p>
             <Link to="/create" style={s.emptyBtn}>Créer une adresse</Link>
           </div>
         ) : (

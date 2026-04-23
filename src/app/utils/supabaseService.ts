@@ -335,7 +335,7 @@ export function getGoogleMapsLink(lat: number, lng: number): string {
 
 export function getWhatsAppLink(addressCode: string, repere: string): string {
   const link = getShareLink(addressCode);
-  const message = `Mon adresse Address-Web: *${addressCode}*\n📍 ${repere}\n🔗 ${link}`;
+  const message = `Mon adresse Adresse Postale Web: *${addressCode}*\n📍 ${repere}\n🔗 ${link}`;
   return `https://wa.me/?text=${encodeURIComponent(message)}`;
 }
 
