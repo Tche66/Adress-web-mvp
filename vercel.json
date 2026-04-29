@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/api/v1/addresses/search", "destination": "/api/v1/addresses" },
+    { "source": "/api/v1/addresses/:code",  "destination": "/api/v1/addresses/[code]" },
+    { "source": "/api/v1/addresses",        "destination": "/api/v1/addresses" },
+    { "source": "/api/(.*)",                "destination": "/api/$1" },
+    { "source": "/(.*)",                    "destination": "/index.html" }
+  ]
+}
