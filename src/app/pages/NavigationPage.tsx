@@ -224,62 +224,139 @@ export function NavigationPage() {
     }
   }, [arrivee]);
 
-  // Calcul itinéraire via OSRM (gratuit, open source)
+  // Décodeur polyline encodé (Valhalla precision=6)
+  const decodePolyline = (encoded: string, precision = 6): [number, number][] => {
+    const coords: [number, number][] = [];
+    let index = 0, lat = 0, lng = 0;
+    const factor = Math.pow(10, precision);
+    while (index < encoded.length) {
+      let shift = 0, result = 0, byte;
+      do { byte = encoded.charCodeAt(index++) - 63; result |= (byte & 0x1f) << shift; shift += 5; } while (byte >= 0x20);
+      lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+      shift = 0; result = 0;
+      do { byte = encoded.charCodeAt(index++) - 63; result |= (byte & 0x1f) << shift; shift += 5; } while (byte >= 0x20);
+      lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+      coords.push([lat / factor, lng / factor]);
+    }
+    return coords;
+  };
+
+  const drawRoute = (coords: [number, number][], dashed = false) => {
+    const map = mapRef.current; if (!map) return;
+    if (routeLayerRef.current) { routeLayerRef.current.remove(); routeLayerRef.current = null; }
+    routeLayerRef.current = L.polyline(coords, {
+      color: '#4F46E5', weight: 5, opacity: 0.85,
+      ...(dashed ? { dashArray: '12, 8' } : {}),
+    }).addTo(map);
+    map.fitBounds(routeLayerRef.current.getBounds(), { padding: [60, 60] });
+  };
+
+  // Calcul itinéraire — Valhalla (open source, CORS ok) avec fallback ligne droite
   const calculerItineraire = useCallback(async () => {
     if (!depart || !arrivee) return;
     setLoadingRoute(true);
     setSteps([]);
     setCurrentStep(0);
 
+    // ── Essai 1 : Valhalla OpenStreetMap (CORS autorisé) ──────────
     try {
-      // OSRM public — gratuit, pas de clé API
-      const url = `https://router.project-osrm.org/route/v1/driving/${depart.longitude},${depart.latitude};${arrivee.longitude},${arrivee.latitude}?steps=true&geometries=geojson&overview=full&language=fr`;
-      const res = await fetch(url);
-      const data = await res.json();
+      const body = {
+        locations: [
+          { lon: depart.longitude,  lat: depart.latitude  },
+          { lon: arrivee.longitude, lat: arrivee.latitude },
+        ],
+        costing: 'auto',
+        directions_options: { language: 'fr-FR', units: 'kilometers' },
+      };
+      const res = await fetch('https://valhalla1.openstreetmap.de/route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(12000),
+      });
 
-      if (data.code !== 'Ok' || !data.routes?.length) {
-        toast.error('Impossible de calculer l\'itinéraire');
-        setLoadingRoute(false);
-        return;
-      }
+      if (res.ok) {
+        const data = await res.json();
+        if (data?.trip?.summary) {
+          const trip = data.trip;
+          const distKm = trip.summary.length;
+          const durMin = Math.round(trip.summary.time / 60);
+          setRouteInfo({ distance: distKm, duration: durMin });
 
-      const route = data.routes[0];
-      const distKm = route.distance / 1000;
-      const durMin = Math.round(route.duration / 60);
+          const allSteps: Step[] = [];
+          for (const leg of trip.legs || []) {
+            for (const man of leg.maneuvers || []) {
+              if (man.length < 0.01 && allSteps.length > 0) continue;
+              allSteps.push({
+                instruction: man.instruction || `Continuer`,
+                distance: man.length || 0,
+                duration: Math.round((man.time || 0) / 60),
+                type: String(man.type || ''),
+                name: man.street_names?.[0] || '',
+              });
+            }
+          }
+          setSteps(allSteps);
 
-      setRouteInfo({ distance: distKm, duration: durMin });
+          if (trip.legs?.[0]?.shape) {
+            const coords = decodePolyline(trip.legs[0].shape, 6);
+            drawRoute(coords);
+          }
 
-      // Extraire les étapes
-      const allSteps: Step[] = [];
-      for (const leg of route.legs) {
-        for (const step of leg.steps) {
-          if (step.distance < 10 && allSteps.length > 0) continue; // Ignorer étapes trop courtes
-          allSteps.push({
-            instruction: step.maneuver?.instruction || translateManeuver(step.maneuver?.type, step.maneuver?.modifier, step.name),
-            distance: step.distance / 1000,
-            duration: Math.round(step.duration / 60),
-            type: `${step.maneuver?.type || ''} ${step.maneuver?.modifier || ''}`,
-            name: step.name || '',
-          });
+          toast.success(`Itinéraire calculé : ${formatDist(distKm)} · ${formatDuree(durMin)}`);
+          setLoadingRoute(false);
+          return;
         }
       }
-      setSteps(allSteps);
+    } catch (_) { /* Valhalla indisponible, on continue */ }
 
-      // Tracer la route sur la carte
-      const map = mapRef.current;
-      if (map) {
-        if (routeLayerRef.current) { routeLayerRef.current.remove(); routeLayerRef.current = null; }
-        const coords: [number, number][] = route.geometry.coordinates.map(([lng, lat]: number[]) => [lat, lng]);
-        routeLayerRef.current = L.polyline(coords, {
-          color: '#4F46E5', weight: 5, opacity: 0.85,
-        }).addTo(map);
-        map.fitBounds(routeLayerRef.current.getBounds(), { padding: [60, 60] });
+    // ── Essai 2 : OSRM routing.openstreetmap.de ───────────────────
+    try {
+      const url = `https://routing.openstreetmap.de/routed-car/route/v1/driving/${depart.longitude},${depart.latitude};${arrivee.longitude},${arrivee.latitude}?steps=true&geometries=geojson&overview=full`;
+      const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.code === 'Ok' && data.routes?.length) {
+          const route = data.routes[0];
+          const distKm = route.distance / 1000;
+          const durMin = Math.round(route.duration / 60);
+          setRouteInfo({ distance: distKm, duration: durMin });
+
+          const allSteps: Step[] = [];
+          for (const leg of route.legs) {
+            for (const step of leg.steps) {
+              if (step.distance < 5 && allSteps.length > 0) continue;
+              allSteps.push({
+                instruction: translateManeuver(step.maneuver?.type, step.maneuver?.modifier, step.name),
+                distance: step.distance / 1000,
+                duration: Math.round(step.duration / 60),
+                type: `${step.maneuver?.type || ''} ${step.maneuver?.modifier || ''}`,
+                name: step.name || '',
+              });
+            }
+          }
+          setSteps(allSteps);
+
+          const coords: [number, number][] = route.geometry.coordinates.map(([lng, lat]: number[]) => [lat, lng]);
+          drawRoute(coords);
+          toast.success(`Itinéraire calculé : ${formatDist(distKm)} · ${formatDuree(durMin)}`);
+          setLoadingRoute(false);
+          return;
+        }
       }
+    } catch (_) { /* OSRM indisponible */ }
 
-      toast.success(`Itinéraire calculé : ${formatDist(distKm)} · ${formatDuree(durMin)}`);
-    } catch (err) {
-      toast.error('Erreur calcul itinéraire');
-    }
+    // ── Fallback : distance à vol d'oiseau ────────────────────────
+    const distKm = haversine(depart.latitude, depart.longitude, arrivee.latitude, arrivee.longitude);
+    const durMin = Math.round(distKm / 40 * 60);
+    setRouteInfo({ distance: distKm, duration: durMin });
+    setSteps([
+      { instruction: `Partir de : ${depart.repere || depart.addressCode}`, distance: 0, duration: 0, type: 'depart', name: '' },
+      { instruction: `Se diriger vers ${arrivee.repere || arrivee.addressCode}`, distance: distKm, duration: durMin, type: 'continue', name: '' },
+      { instruction: '🏁 Arrivée à destination', distance: 0, duration: 0, type: 'arrive', name: '' },
+    ]);
+    drawRoute([[depart.latitude, depart.longitude], [arrivee.latitude, arrivee.longitude]], true);
+    toast.success(`Distance : ${formatDist(distKm)} — Ouvrez Google Maps pour l'itinéraire détaillé`);
     setLoadingRoute(false);
   }, [depart, arrivee]);
 
