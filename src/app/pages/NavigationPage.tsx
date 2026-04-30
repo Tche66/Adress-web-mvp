@@ -165,7 +165,11 @@ function SearchBox({ label, color, value, onSelect, placeholder }: {
             <p className="text-xs text-gray-500 truncate max-w-[220px]">{value.repere}{value.ville ? ` · ${value.ville}` : ''}</p>
           </div>
           <button onClick={() => { onSelect(null); setQuery(''); }} className="text-gray-400 hover:text-red-500 p-1 ml-2 flex-shrink-0">
-
+  const useGPS = () => {
+    if (!navigator.geolocation) { toast.error('GPS non disponible'); return; }
+    setGpsLoading(true);
+    
+    // Assure-toi qu'il n'y a AUCUN symbole <<<< ou ==== juste ici
     navigator.geolocation.getCurrentPosition(
       pos => {
         const gps = {
@@ -180,7 +184,10 @@ function SearchBox({ label, color, value, onSelect, placeholder }: {
         setGpsLoading(false);
         toast.success('Position GPS détectée');
       },
-      () => { toast.error('GPS indisponible'); setGpsLoading(false); }
+      () => { 
+        toast.error('GPS indisponible'); 
+        setGpsLoading(false); 
+      }
     );
   };
 
