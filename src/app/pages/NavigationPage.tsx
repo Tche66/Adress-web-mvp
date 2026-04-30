@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 import { MapPin, Navigation, Search, X, ArrowRight, Truck, ChevronRight, RotateCcw, ExternalLink, Locate, Clock, Route } from 'lucide-react';
-2a718fb87b6564e51750f04414a94ca02b7366e3
+
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { toast } from 'sonner';
@@ -21,7 +21,7 @@ import type { Address } from '../utils/supabaseService';
 
 import { Logo as LogoIcon } from '../components/Logo';
 
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
 
 // Fix icônes Leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -99,7 +99,7 @@ function haversine(lat1: number, lon1: number, lat2: number, lon2: number): numb
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
-2a718fb87b6564e51750f04414a94ca02b7366e3
+
 function SearchBox({ label, color, value, onSelect, placeholder }: {
   label: string; color: string; value: Address | null;
   onSelect: (a: Address | null) => void; placeholder: string;
@@ -201,7 +201,7 @@ function SearchBox({ label, color, value, onSelect, placeholder }: {
             <p className="text-xs text-gray-500">{value.repere}{value.ville ? ` · ${value.ville}` : ''}</p>
           </div>
           <button onClick={() => { onSelect(null); setQuery(''); }} className="text-gray-400 hover:text-red-500 p-1">
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -219,7 +219,7 @@ function SearchBox({ label, color, value, onSelect, placeholder }: {
           <button onClick={useGPS} title="GPS"
 
           <button onClick={useGPS} title="Utiliser ma position GPS"
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600">
             {gpsLoading
               ? <div className="w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
@@ -244,7 +244,7 @@ function SearchBox({ label, color, value, onSelect, placeholder }: {
               Recherche...
             </div>
           )}
-2a718fb87b6564e51750f04414a94ca02b7366e3
+
         </div>
       )}
     </div>
@@ -506,7 +506,7 @@ export function NavigationPage() {
     }
   }, [depart, arrivee]);
 
-2a718fb87b6564e51750f04414a94ca02b7366e3
+
   const loadCode = async () => {
     const code = codeInput.trim().toUpperCase();
     if (!code) return;
@@ -525,7 +525,7 @@ export function NavigationPage() {
 
   const inverser = () => { const tmp = depart; setDepart(arrivee); setArrivee(tmp); };
 
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
   const openGoogleMaps = (mode: string) => {
     if (!depart || !arrivee) return;
     window.open(`https://www.google.com/maps/dir/?api=1&origin=${depart.latitude},${depart.longitude}&destination=${arrivee.latitude},${arrivee.longitude}&travelmode=${mode}`, '_blank');
@@ -567,7 +567,7 @@ export function NavigationPage() {
           </Link>
           <span className="text-gray-300">›</span>
           <span className="text-gray-600 font-medium flex items-center gap-1.5">
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
             <Route className="w-4 h-4 text-indigo-600" /> Navigation guidée
           </span>
         </div>
@@ -635,7 +635,7 @@ export function NavigationPage() {
           {/* Saisie code rapide */}
           <Card className="p-4 bg-indigo-50 border-indigo-100">
             <p className="text-xs font-bold text-indigo-700 mb-2 uppercase tracking-wider">Saisir un code APW</p>
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
             <div className="flex gap-2">
               <input
                 type="text" value={codeInput}
@@ -666,7 +666,7 @@ export function NavigationPage() {
           {/* Départ */}
           <Card className="p-4">
             <SearchBox label="Départ" color="indigo" value={depart} onSelect={setDepart} placeholder="Rechercher ou code APW..." /> 
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
           </Card>
 
           {/* Inverser */}
@@ -676,7 +676,7 @@ export function NavigationPage() {
               className="w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 shadow-sm">
               className="w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 shadow-sm transition-colors"
               title="Inverser">
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
               <RotateCcw className="w-4 h-4 text-gray-500" />
             </button>
           </div>
@@ -804,7 +804,7 @@ export function NavigationPage() {
           {/* Boutons navigation externe */}
           {depart && arrivee && (
             <div className="space-y-2">
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
               <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Ouvrir dans</p>
               {[
                 { label: '🗺️ Google Maps — Voiture', mode: 'driving' },
@@ -908,7 +908,7 @@ export function NavigationPage() {
                 <Navigation className="w-12 h-12 text-indigo-300 mx-auto mb-3" />
                 <p className="text-gray-500 font-medium">Entrez un point de départ</p>
                 <p className="text-gray-400 text-sm">et une destination pour voir l'itinéraire</p>
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
               </div>
             </div>
           )}
@@ -928,7 +928,7 @@ export function NavigationPage() {
       {"icon":"📍","title":"Code APW","desc":"Tapez directement un code AW-ABI-XXXXX — le 1er devient le départ, le 2e l'arrivée."},
       {"icon":"📍","title":"GPS","desc":"Cliquez sur l'icône 📍 dans la barre de recherche pour utiliser votre position GPS comme point de départ."},
       {"icon":"🗺️","title":"Navigation externe","desc":"Une fois les deux points définis, ouvrez Google Maps ou Waze pour la navigation GPS réelle."},
- 2a718fb87b6564e51750f04414a94ca02b7366e3
+ 
     ]} />
     </>
   );
