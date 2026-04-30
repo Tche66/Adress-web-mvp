@@ -21,6 +21,7 @@ import { ConditionsUtilisationPage } from "./pages/ConditionsUtilisationPage";
 import { SystemStatus } from "./pages/SystemStatus";
 import { NotFound } from "./pages/NotFound";
 import { BrumerieAuthPage } from "./pages/BrumerieAuthPage";
+import { NavigationPage } from "./pages/NavigationPage";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { path: "/politique-confidentialite", Component: PolitiqueConfidentialitePage },
       { path: "/conditions-utilisation",    Component: ConditionsUtilisationPage },
       { path: "/system-status",             Component: SystemStatus },
+      { path: "/navigation",               Component: NavigationPage },
 
       // Admin — protégé par RequireAdmin (attend que profile soit chargé)
       { path: "/admin", element: <RequireAdmin><AdminPage /></RequireAdmin> },

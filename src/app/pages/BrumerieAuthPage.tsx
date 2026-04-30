@@ -54,7 +54,7 @@ export function BrumerieAuthPage() {
         <div className="flex items-center justify-center gap-4 mb-6">
           <div className="flex items-center gap-2">
             <Logo size={40} />
-            <span className="font-bold text-gray-900 text-lg">Address-Web</span>
+            <span className="font-bold text-gray-900 text-lg">Adresse Postale Web</span>
           </div>
         </div>
 

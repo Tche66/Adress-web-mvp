@@ -206,7 +206,7 @@ export function AdminPage() {
           <div className="flex items-center gap-3">
             <Logo size={32} />
             <div>
-              <h1 className="font-bold text-lg">Address-Web Admin</h1>
+              <h1 className="font-bold text-lg">Adresse Postale Web Admin</h1>
               <p className="text-gray-400 text-xs">{user?.email}</p>
             </div>
           </div>

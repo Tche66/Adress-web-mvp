@@ -112,7 +112,7 @@ export function ApiDocsPage() {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               
-              <Logo size={32} /><span className="text-xl font-bold text-gray-900">Address-Web</span>
+              <Logo size={32} /><span className="text-xl font-bold text-gray-900">Adresse Postale Web</span>
               <span className="text-gray-400 mx-1">›</span>
               <span className="text-gray-600 font-medium">API</span>
             </Link>
@@ -127,9 +127,9 @@ export function ApiDocsPage() {
 
         {/* Intro */}
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-3">API Address-Web</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">API Adresse Postale Web</h1>
           <p className="text-gray-600 text-lg leading-relaxed">
-            Intégrez Address-Web dans vos applications. Créez, consultez et recherchez des adresses numériques depuis n'importe quelle plateforme — e-commerce, livraison, taxi, fintech.
+            Intégrez Adresse Postale Web dans vos applications. Créez, consultez et recherchez des adresses numériques depuis n'importe quelle plateforme — e-commerce, livraison, taxi, fintech.
           </p>
         </div>
 
@@ -241,7 +241,7 @@ export function ApiDocsPage() {
 
         {/* CTA */}
         <Card className="mt-10 p-8 text-center bg-indigo-600 border-0">
-          <h2 className="text-xl font-bold text-white mb-2">Prêt à intégrer Address-Web ?</h2>
+          <h2 className="text-xl font-bold text-white mb-2">Prêt à intégrer Adresse Postale Web ?</h2>
           <p className="text-indigo-200 text-sm mb-5">
             Créez votre compte, obtenez votre clé API gratuite et commencez en quelques minutes.
           </p>
@@ -258,8 +258,8 @@ export function ApiDocsPage() {
         </Card>
       </div>
     </div>
-      <PageGuide storageKey="api" steps={[{"icon": "🔌", "title": "API Address-Web", "desc": "Intégrez Address-Web dans vos applications, sites ou systèmes de livraison."}, {"icon": "🔑", "title": "Obtenir une clé API", "desc": "Créez un compte et allez dans Profil → API pour générer votre clé gratuite."}, {"icon": "📡", "title": "Faire une requête", "desc": "Utilisez l'en-tête Authorization: Bearer VOTRE_CLE dans chaque requête."}, {"icon": "📊", "title": "Limites", "desc": "100 requêtes/jour en gratuit. Passez premium pour 10 000 req/jour."}]} />
-      <PageGuide storageKey="api" steps={[{"icon": "🔌", "title": "API Address-Web", "desc": "Intégrez Address-Web dans vos apps et systèmes de livraison."}, {"icon": "🔑", "title": "Obtenir une clé", "desc": "Allez dans Profil puis API pour générer votre clé gratuite."}, {"icon": "📡", "title": "Faire une requête", "desc": "Utilisez Authorization: Bearer VOTRE_CLE dans chaque requête."}, {"icon": "📊", "title": "Limites", "desc": "100 requêtes/jour en gratuit. Premium donne 10 000/jour."}]} />
+      <PageGuide storageKey="api" steps={[{"icon": "🔌", "title": "API Adresse Postale Web", "desc": "Intégrez Adresse Postale Web dans vos applications, sites ou systèmes de livraison."}, {"icon": "🔑", "title": "Obtenir une clé API", "desc": "Créez un compte et allez dans Profil → API pour générer votre clé gratuite."}, {"icon": "📡", "title": "Faire une requête", "desc": "Utilisez l'en-tête Authorization: Bearer VOTRE_CLE dans chaque requête."}, {"icon": "📊", "title": "Limites", "desc": "100 requêtes/jour en gratuit. Passez premium pour 10 000 req/jour."}]} />
+      <PageGuide storageKey="api" steps={[{"icon": "🔌", "title": "API Adresse Postale Web", "desc": "Intégrez Adresse Postale Web dans vos apps et systèmes de livraison."}, {"icon": "🔑", "title": "Obtenir une clé", "desc": "Allez dans Profil puis API pour générer votre clé gratuite."}, {"icon": "📡", "title": "Faire une requête", "desc": "Utilisez Authorization: Bearer VOTRE_CLE dans chaque requête."}, {"icon": "📊", "title": "Limites", "desc": "100 requêtes/jour en gratuit. Premium donne 10 000/jour."}]} />
     </>
   );
 }

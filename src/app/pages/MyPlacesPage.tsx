@@ -68,7 +68,7 @@ export function MyPlacesPage() {
           <div style={s.empty}>
             <div style={s.emptyIcon}>🗺️</div>
             <p style={s.emptyTitle}>Aucun lieu sauvegardé</p>
-            <p style={s.emptySub}>Ouvrez un lien Address-Web et appuyez sur "Sauvegarder" pour l'ajouter ici.</p>
+            <p style={s.emptySub}>Ouvrez un lien Adresse Postale Web et appuyez sur "Sauvegarder" pour l'ajouter ici.</p>
             <Link to="/create" style={s.emptyBtn}>Créer une adresse</Link>
           </div>
         ) : (
@@ -89,8 +89,10 @@ export function MyPlacesPage() {
 
                 <div style={s.cardActions}>
                   <button style={s.labelBtn} onClick={() => setEditingLabel(editingLabel === addr.addressCode ? null : addr.addressCode)}>
-                    {addr.label ? `Étiquette : ${addr.label}` : 'Ajouter étiquette'}
+                    {addr.label ? `Étiquette : ${addr.label}` : 'Étiquette'}
                   </button>
+                  <Link to={`/${addr.addressCode}/modifier`} style={s.editBtn}>✏️ Modifier</Link>
+                  <Link to={`/navigation`} style={s.navBtn}>🧭 Naviguer</Link>
                   <button style={s.removeBtn} onClick={() => handleRemove(addr.addressCode)}>Retirer</button>
                 </div>
 
@@ -139,6 +141,8 @@ const s: Record<string, React.CSSProperties> = {
   cardActions: { display: 'flex', gap: 8, padding: '0 16px 14px', borderTop: '1px solid #f7f7f5', paddingTop: 10 },
   labelBtn: { fontSize: 12, padding: '5px 12px', background: '#f0f0f0', border: 'none', borderRadius: 20, color: '#555', cursor: 'pointer' },
   removeBtn: { fontSize: 12, padding: '5px 12px', background: 'transparent', border: 'none', borderRadius: 20, color: '#e55', cursor: 'pointer' },
+  editBtn: { fontSize: 12, padding: '5px 12px', background: '#f0f4ff', borderRadius: 20, color: '#4F46E5', textDecoration: 'none' },
+  navBtn: { fontSize: 12, padding: '5px 12px', background: '#f0f4ff', borderRadius: 20, color: '#4F46E5', textDecoration: 'none' },
   labelPicker: { display: 'flex', flexWrap: 'wrap', gap: 8, padding: '0 16px 16px' },
   labelPill: { fontSize: 13, padding: '6px 14px', background: '#f7f7f5', border: '1.5px solid #e8e8e8', borderRadius: 20, cursor: 'pointer', color: '#1a1a1a' },
   labelPillActive: { background: '#1a1a1a', color: '#fff', borderColor: '#1a1a1a' },

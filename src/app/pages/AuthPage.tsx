@@ -99,7 +99,7 @@ export function AuthPage() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <Logo size={32} />
-            <span className="text-xl font-bold text-gray-900">Address-Web</span>
+            <span className="text-xl font-bold text-gray-900">Adresse Postale Web</span>
           </Link>
           <Link to="/"><Button variant="ghost" size="sm" className="text-gray-500">Continuer sans compte</Button></Link>
         </div>

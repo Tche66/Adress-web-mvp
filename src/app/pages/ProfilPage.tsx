@@ -236,7 +236,7 @@ export function ProfilPage() {
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             
-            <Logo size={32} /><span className="text-xl font-bold text-gray-900">Address-Web</span>
+            <Logo size={32} /><span className="text-xl font-bold text-gray-900">Adresse Postale Web</span>
           </Link>
           <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-500">
             <LogOut className="w-4 h-4 mr-1" />Déconnexion
@@ -601,7 +601,7 @@ export function ProfilPage() {
               ) : apiKeys.length === 0 ? (
                 <div className="text-center py-8">
                   <p className="text-gray-500 text-sm mb-3">Aucune clé API créée</p>
-                  <p className="text-gray-400 text-xs mb-4">Créez une clé pour intégrer Address-Web dans vos applications</p>
+                  <p className="text-gray-400 text-xs mb-4">Créez une clé pour intégrer Adresse Postale Web dans vos applications</p>
                   <Button size="sm" onClick={handleCreateApiKey} disabled={generatingKey}>
                     Créer ma première clé
                   </Button>
@@ -670,7 +670,7 @@ export function ProfilPage() {
                 <span className="text-lg">🔑</span>
                 <h3 className="font-semibold text-gray-900">Clés API</h3>
               </div>
-              <p className="text-sm text-gray-500 mb-4">Gérez vos clés pour intégrer Address-Web dans vos applications.</p>
+              <p className="text-sm text-gray-500 mb-4">Gérez vos clés pour intégrer Adresse Postale Web dans vos applications.</p>
               {loadingApiKeys ? (
                 <div className="text-center py-4"><div className="w-6 h-6 border-2 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto" /></div>
               ) : (
@@ -886,7 +886,7 @@ export function ProfilPage() {
         </div>
       )}
     </div>
-      <PageGuide storageKey="profil" steps={[{"icon": "👤", "title": "Votre profil", "desc": "Modifiez votre nom, photo et informations personnelles."}, {"icon": "📍", "title": "Mes adresses", "desc": "Retrouvez vos adresses créées, partagez-les ou supprimez-les."}, {"icon": "🔑", "title": "Clés API", "desc": "Générez une clé API pour intégrer Address-Web dans vos apps."}, {"icon": "⚙️", "title": "Paramètres", "desc": "Changez votre mot de passe ou gérez les paramètres du compte."}]} />
+      <PageGuide storageKey="profil" steps={[{"icon": "👤", "title": "Votre profil", "desc": "Modifiez votre nom, photo et informations personnelles."}, {"icon": "📍", "title": "Mes adresses", "desc": "Retrouvez vos adresses créées, partagez-les ou supprimez-les."}, {"icon": "🔑", "title": "Clés API", "desc": "Générez une clé API pour intégrer Adresse Postale Web dans vos apps."}, {"icon": "⚙️", "title": "Paramètres", "desc": "Changez votre mot de passe ou gérez les paramètres du compte."}]} />
     </>
   );
 }

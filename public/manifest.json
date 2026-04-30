@@ -1,6 +1,6 @@
 {
-  "name": "Address-Web \u2014 Adressage num\u00e9rique Afrique",
-  "short_name": "Address-Web",
+  "name": "Adresse Postale Web \u2014 Adressage num\u00e9rique Afrique",
+  "short_name": "Adresse Postale Web",
   "description": "Donnez une adresse num\u00e9rique pr\u00e9cise \u00e0 chaque lieu en Afrique",
   "start_url": "/",
   "display": "standalone",

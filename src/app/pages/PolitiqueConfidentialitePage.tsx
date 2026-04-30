@@ -12,7 +12,7 @@ export function PolitiqueConfidentialitePage() {
             </Link>
             <div className="flex items-center gap-2">
               
-              <h1 className="text-xl font-bold text-gray-900">Address-Web</h1>
+              <h1 className="text-xl font-bold text-gray-900">Adresse Postale Web</h1>
             </div>
           </div>
         </div>
@@ -30,13 +30,13 @@ export function PolitiqueConfidentialitePage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Présentation</h2>
             <p className="text-gray-600 leading-relaxed">
-              Address-Web est une plateforme numérique de géolocalisation permettant à toute personne de créer, partager et retrouver des adresses numériques précises. Le présent document décrit la manière dont Address-Web collecte, utilise et protège vos données personnelles, conformément à la législation ivoirienne sur la protection des données personnelles et aux recommandations de l'Autorité de Régulation des Télécommunications/TIC de Côte d'Ivoire (ARTCI).
+              Adresse Postale Web est une plateforme numérique de géolocalisation permettant à toute personne de créer, partager et retrouver des adresses numériques précises. Le présent document décrit la manière dont Adresse Postale Web collecte, utilise et protège vos données personnelles, conformément à la législation ivoirienne sur la protection des données personnelles et aux recommandations de l'Autorité de Régulation des Télécommunications/TIC de Côte d'Ivoire (ARTCI).
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Données collectées</h2>
-            <p className="text-gray-600 leading-relaxed mb-3">Address-Web collecte uniquement les données nécessaires au fonctionnement du service :</p>
+            <p className="text-gray-600 leading-relaxed mb-3">Adresse Postale Web collecte uniquement les données nécessaires au fonctionnement du service :</p>
             <ul className="list-disc pl-6 space-y-2 text-gray-600">
               <li><strong>Coordonnées GPS</strong> (latitude et longitude) — fournies volontairement par l'utilisateur lors de la création d'une adresse.</li>
               <li><strong>Point de repère</strong> — texte libre saisi par l'utilisateur pour décrire le lieu.</li>
@@ -45,14 +45,14 @@ export function PolitiqueConfidentialitePage() {
               <li><strong>Données de navigation</strong> — nombre de consultations d'une adresse (compteur anonyme).</li>
             </ul>
             <p className="text-gray-600 leading-relaxed mt-3">
-              Address-Web ne collecte pas de nom, prénom, numéro de téléphone, adresse postale ni aucune donnée sensible sans consentement explicite.
+              Adresse Postale Web ne collecte pas de nom, prénom, numéro de téléphone, adresse postale ni aucune donnée sensible sans consentement explicite.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">3. Consentement</h2>
             <p className="text-gray-600 leading-relaxed">
-              La création d'une adresse est entièrement volontaire. En plaçant un repère sur la carte et en cliquant sur "Créer mon adresse", l'utilisateur consent explicitement à la publication de la localisation choisie. L'utilisateur peut à tout moment supprimer son adresse depuis son espace personnel ou en contactant l'équipe Address-Web.
+              La création d'une adresse est entièrement volontaire. En plaçant un repère sur la carte et en cliquant sur "Créer mon adresse", l'utilisateur consent explicitement à la publication de la localisation choisie. L'utilisateur peut à tout moment supprimer son adresse depuis son espace personnel ou en contactant l'équipe Adresse Postale Web.
             </p>
           </section>
 
@@ -76,13 +76,13 @@ export function PolitiqueConfidentialitePage() {
               <li>Améliorer le service (statistiques anonymes d'utilisation).</li>
             </ul>
             <p className="text-gray-600 leading-relaxed mt-3">
-              Address-Web ne vend, ne loue et ne cède aucune donnée personnelle à des tiers à des fins commerciales.
+              Adresse Postale Web ne vend, ne loue et ne cède aucune donnée personnelle à des tiers à des fins commerciales.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Services tiers</h2>
-            <p className="text-gray-600 leading-relaxed mb-3">Address-Web utilise les services tiers suivants :</p>
+            <p className="text-gray-600 leading-relaxed mb-3">Adresse Postale Web utilise les services tiers suivants :</p>
             <ul className="list-disc pl-6 space-y-2 text-gray-600">
               <li><strong>OpenStreetMap / Nominatim</strong> — cartographie et géocodage. Données sous licence ODbL. Aucune donnée personnelle n'est transmise au-delà des coordonnées GPS pour la détection de ville.</li>
               <li><strong>Supabase</strong> — stockage sécurisé des adresses. Données hébergées sur des serveurs sécurisés en Europe (RGPD compatible).</li>
@@ -93,7 +93,7 @@ export function PolitiqueConfidentialitePage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Sécurité des données</h2>
             <p className="text-gray-600 leading-relaxed">
-              Address-Web applique les mesures de sécurité suivantes : connexion HTTPS obligatoire, base de données protégée avec Row Level Security (RLS), accès aux données restreint par utilisateur, mots de passe chiffrés (jamais stockés en clair). Malgré ces précautions, aucun système n'est infaillible. Address-Web ne peut garantir une sécurité absolue contre toute intrusion.
+              Adresse Postale Web applique les mesures de sécurité suivantes : connexion HTTPS obligatoire, base de données protégée avec Row Level Security (RLS), accès aux données restreint par utilisateur, mots de passe chiffrés (jamais stockés en clair). Malgré ces précautions, aucun système n'est infaillible. Adresse Postale Web ne peut garantir une sécurité absolue contre toute intrusion.
             </p>
           </section>
 
@@ -114,7 +114,7 @@ export function PolitiqueConfidentialitePage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">9. Cookies</h2>
             <p className="text-gray-600 leading-relaxed">
-              Address-Web utilise uniquement des cookies fonctionnels nécessaires au bon fonctionnement du service (session utilisateur, préférences). Aucun cookie publicitaire ou de tracking tiers n'est utilisé.
+              Adresse Postale Web utilise uniquement des cookies fonctionnels nécessaires au bon fonctionnement du service (session utilisateur, préférences). Aucun cookie publicitaire ou de tracking tiers n'est utilisé.
             </p>
           </section>
 

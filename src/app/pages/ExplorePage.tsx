@@ -194,7 +194,7 @@ export function ExplorePage() {
         )}
       </div>
     </div>
-      <PageGuide storageKey="explore" steps={[{"icon": "🗺️", "title": "Carte des adresses", "desc": "Cette carte affiche toutes les adresses publiques Address-Web."}, {"icon": "🔍", "title": "Rechercher", "desc": "Trouvez par ville, repère ou code AW dans la barre de recherche."}, {"icon": "📌", "title": "Cliquer un pin", "desc": "Cliquez sur un marqueur pour voir les détails et naviguer."}]} />
+      <PageGuide storageKey="explore" steps={[{"icon": "🗺️", "title": "Carte des adresses", "desc": "Cette carte affiche toutes les adresses publiques Adresse Postale Web."}, {"icon": "🔍", "title": "Rechercher", "desc": "Trouvez par ville, repère ou code AW dans la barre de recherche."}, {"icon": "📌", "title": "Cliquer un pin", "desc": "Cliquez sur un marqueur pour voir les détails et naviguer."}]} />
     </>
   );
 }

@@ -66,13 +66,20 @@ export function LivreurDashboardPage() {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               
-              <h1 className="text-xl font-bold text-gray-900">Address-Web</h1>
+              <h1 className="text-xl font-bold text-gray-900">Adresse Postale Web</h1>
               <span className="text-gray-400">›</span>
               <span className="text-gray-600 font-medium">Tableau de bord livreur</span>
             </Link>
-            <Button variant="outline" size="sm" onClick={loadDeliveries}>
-              <RefreshCw className="w-4 h-4 mr-2" />Actualiser
-            </Button>
+            <div className="flex gap-2">
+              <Link to="/navigation">
+                <Button variant="outline" size="sm" className="border-indigo-300 text-indigo-600 hover:bg-indigo-50">
+                  <Navigation className="w-4 h-4 mr-1" />Naviguer
+                </Button>
+              </Link>
+              <Button variant="outline" size="sm" onClick={loadDeliveries}>
+                <RefreshCw className="w-4 h-4 mr-2" />Actualiser
+              </Button>
+            </div>
           </div>
         </div>
       </header>
